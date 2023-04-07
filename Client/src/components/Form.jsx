@@ -25,8 +25,10 @@ export default function Form({login})
         }
         function handleSubmit(event)
         {
+
                 event.preventDefault();
                 login(user);
+
 
         }
 

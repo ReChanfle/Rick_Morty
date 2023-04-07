@@ -6,19 +6,23 @@ export default function Detail()
 {
     const {id}= useParams();
     const [character,setCharacter] = useState([]);
-
-   
+               
+        
                 useEffect(() => {
-                    fetch(`http://localhost:3001/detail/${id}`).then((response)=> response.json())
+                    console.log(id);
+                   fetch(`http://localhost:3001/detail/${id}`).then((response)=> response.json())
                     .then((data)=> {
-                        if(data[0].name) {
-                            setCharacter(data[0]);
+                        console.log(data);
+                        if(data.name) {
+                            setCharacter(data);
                          } else {
                             window.alert('No hay personajes con ese ID');
                          }
                     }
                    
-                    )
+                    ).catch((err)=>{
+                        console.log(err.message)
+                    })
                     return setCharacter({});
                  }, [id]);
               

@@ -1,36 +1,22 @@
 var http = require("http");
-const data = require("./utils/data");
-var fs = require("fs");
+const  getCharById  = require("./controlllers/getCharById.js");
+const axios = require('axios');
 
-const PORT = 3001;
+        const PORT = 3001;
 
- const newServer = http.createServer((req, res)=>{ 
+const newServer = http.createServer((req, res)=>{ 
 
+        res.setHeader('Access-Control-Allow-Origin', '*');
 	console.log(`Server raised in port ${PORT}`);
 
-        let id = req.url.slice(-1);
+        let id = req.url.split("/").pop();
        
+      
         
-    if(req.url===`/detail/${id}`)
-    {
-             const ch  = data.filter((e)=> {
-                if(e.id==id)
-                    return e;
-             });
-
-             res.setHeader('Access-Control-Allow-Origin', '*');
-                    //console.log(JSON.stringify(ch));
-            if(!ch)
-           res.writeHead(404,{ 'Content-type':'text/plain' },"json not found");
-             
-            res.writeHead(200,{ 'Content-type':'application/json' }).end(JSON.stringify(ch));
-  
-        
-        
-    }
-
+    if(req.url===`/detail/${id}`)   getCharById(res,id);
     
-
+     
+        
  });
 
 
