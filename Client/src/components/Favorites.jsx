@@ -1,12 +1,14 @@
 import Card from "./Card"
 import { filterCards,orderCards,original } from "../redux/actions";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 export default function Favorites({favorites,onClose})
 {
     const [aux,setAux] = useState(false);
   
-       
+    useEffect(()=>{
+        return ()=> dispatch(original());
+     },[])
 
     const dispatch = useDispatch();
 
@@ -24,7 +26,7 @@ export default function Favorites({favorites,onClose})
                     if(event.target.value!=="All")
                     dispatch(filterCards(event.target.value));
                     else if(event.target.value==="All")
-                    dispatch(original(event.target.value));
+                    dispatch(original());
                 
     }
 

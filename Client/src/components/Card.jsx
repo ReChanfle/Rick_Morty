@@ -28,12 +28,21 @@ export default function  Card({character,onClose}) {
 
   
       function  add() {
-         dispatch(addFav(character));
-         
+        
+           //console.log(character)
+         fetch(`http://localhost:3001/fav`,{method:"PUT",headers: { 'Content-Type': 'application/json' },body:JSON.stringify(character)}).then((response)=> response.json())
+               .then((data)=> 
+               dispatch(addFav(character))
+     )
+
+      
       }
     
       function  remove () {
-         dispatch(removeFav(character.id));
+         fetch(`http://localhost:3001/fav`,{method:"DELETE",headers: { 'Content-Type': 'application/json' },body:JSON.stringify(character)}).then((response)=> response.json())
+               .then((data)=> 
+               dispatch(removeFav(data))
+     )
       }
      
    
@@ -41,6 +50,7 @@ export default function  Card({character,onClose}) {
 
    function handleFavorite()
    {
+      
          if(isFav)
             {
                setFav(false);

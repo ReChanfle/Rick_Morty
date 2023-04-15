@@ -35,7 +35,7 @@ function Nav({onSearch,logOut,access}) {
           <span class="navbar-toggler-icon"><img src="https://cdn-icons-png.flaticon.com/512/545/545806.png" style={styleExpandNavLogo}/></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <Link  to="/home">
+        <Link   to="/home">
                 <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c50a4a55883023.5996f8afa3f5c.gif" style={styleLogo}/> 
               </Link>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">

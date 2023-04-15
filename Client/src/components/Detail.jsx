@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState,useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+
 export default function Detail()
 {
     const {id}= useParams();
@@ -9,22 +9,37 @@ export default function Detail()
                
         
                 useEffect(() => {
-                    console.log(id);
-                   fetch(`http://localhost:3001/detail/${id}`).then((response)=> response.json())
+                    (async function () {
+                        
+                        const response = await fetch(`http://localhost:3001/detail/${id}`);
+                        const responseJson = await response.json();
+
+                        try{
+                            if(responseJson.name) {
+                                setCharacter(responseJson);
+                             }
+                        }
+                        catch(err)
+                        {
+                            console.log(err.message);
+                        }
+                    })();
+                   
+                  
+                  /* fetch(`http://localhost:3001/detail/${id}`).then((response)=>response.json())
                     .then((data)=> {
-                        console.log(data);
-                        if(data.name) {
-                            setCharacter(data);
-                         } else {
+                        else {
                             window.alert('No hay personajes con ese ID');
                          }
                     }
                    
                     ).catch((err)=>{
                         console.log(err.message)
-                    })
+                    }) */
                     return setCharacter({});
-                 }, [id]);
+                 }, [id]); 
+
+                
               
     
 

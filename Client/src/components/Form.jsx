@@ -25,9 +25,20 @@ export default function Form({login})
         }
         function handleSubmit(event)
         {
+            event.preventDefault();
 
-                event.preventDefault();
-                login(user);
+            fetch(`http://localhost:3001/login?email=${user.email}&password=${user.password}`,{method: "POST"}).then((response)=> response.json())
+            .then((data) => {
+               console.log(data);
+                if(data.access)
+                    login(user);
+           
+             }).catch((error)=>{
+                    console.log(error.message);
+            });
+
+              
+               
 
 
         }

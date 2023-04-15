@@ -147,7 +147,7 @@ function onClose(id)
        
          //setCharacters(
            // (characters) =>  {return [newChars] } );
-
+        //bug con favorites 
             setCharacters((characters) => {
                return characters.filter((ch) => ch.id !== id);
              });
