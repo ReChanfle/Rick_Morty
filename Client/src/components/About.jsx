@@ -3,8 +3,10 @@
 export default function About()
 {
     return (
-        <div >
-            <h1>asdadadad</h1>
+        <div class="container">
+            <h1>Title placeholder</h1>
+                <p>Placeholder Placeholder </p>
+                    
         </div>
      );
 }

@@ -1,6 +1,6 @@
 import SearchBar from './SearchBar.jsx';
 import { Link } from 'react-router-dom';
-
+import '../css/Nav.css';
 
 function Nav({onSearch,logOut,access}) {
 
@@ -13,10 +13,25 @@ function Nav({onSearch,logOut,access}) {
                 logOut(false);
 
         }
+        function responsiveNav() {
+          var x = document.getElementById("myTopnav");
+          if (x.className === "topnav") {
+            x.className += " responsive";
+          } else {
+            x.className = "topnav";
+          }
+        }
+
+       
+
+       
+
+        
+
 
         const styleLogo = {
-          width: '65px',
-          heigth: '65px'
+          width: '45px',
+          heigth: '45px'
         }
         const styleExpandNavLogo ={
           width: '35px',
@@ -26,41 +41,92 @@ function Nav({onSearch,logOut,access}) {
 
    return (
 
-      
-   
-          
-          <nav class="navbar navbar-expand-lg bg-dark ">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"><img src="https://cdn-icons-png.flaticon.com/512/545/545806.png" style={styleExpandNavLogo}/></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+   /* <nav >
+    <ul>
+      <li>
         <Link   to="/home">
                 <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c50a4a55883023.5996f8afa3f5c.gif" style={styleLogo}/> 
               </Link>
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      </li>
+      <li>
+        <Link to="/About">
+                <a >About</a>
+              </Link>
+       
+      </li>
+      <li>
+         <Link to="/favorites">
+                <a  >Favs</a>
+              </Link>
+      </li>
+      <li>
+        <a href="#">Services</a>
+      </li>
+      <li>
+        <SearchBar onSearch={onSearch} />
+            <form   role="search" onSubmit={handleSubmit}>
+                          <button  type="submit">Logout</button>
+                      </form>  
+      </li>
+        
+    </ul>
+  </nav> */
+
+  <div class="topnav " id="myTopnav" >
+   
+    <Link   to="/home">Home</Link>
+
+    <Link to="/favorites">Favs</Link>
+
+    <Link to="/About">About</Link>
+   
+    <SearchBar onSearch={onSearch} />
+
+    
+
+    <a onClick={handleSubmit}>Logout</a>
+    
+    <a class="icon" onClick={responsiveNav}>
+    <i class="fa fa-bars"></i>
+    </a>
+  </div>
+  
+
+  
+
           
-            <li class="nav-item">
+       /*   <nav>
+      <div >
+        <a  type="button"    >
+          <span ><img src="https://cdn-icons-png.flaticon.com/512/545/545806.png" style={styleExpandNavLogo}/></span>
+        </a>
+        <div  >
+        <Link   to="/home">
+                <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c50a4a55883023.5996f8afa3f5c.gif" style={styleLogo}/> 
+              </Link>
+          <ul>
+          
+            <li >
             <Link to="/favorites">
-                <a class=" m-2 btn btn-dark" aria-current="page" >Favs</a>
+                <a  >Favs</a>
               </Link>
             </li>
-            <li class="nav-item">
+            <li >
             <Link to="/About">
-                <a class=" m-2 btn btn-dark" aria-current="page" >About</a>
+                <a >About</a>
               </Link>
             </li>
-            <li class="nav-item" id="alertSearch">
+            <li  id="alertSearch">
 
             </li>
           </ul>
             <SearchBar onSearch={onSearch} />
-            <form  class="d-flex"   role="search" onSubmit={handleSubmit}>
-                          <button class=" m-2 btn btn-outline-warning" type="submit">Logout</button>
+            <form   role="search" onSubmit={handleSubmit}>
+                          <button  type="submit">Logout</button>
                       </form>  
         </div>
       </div>
-    </nav>
+    </nav> */
    );
 }
 

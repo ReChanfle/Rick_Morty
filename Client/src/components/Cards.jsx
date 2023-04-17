@@ -1,5 +1,5 @@
-
 import Card from "./Card";
+import '../css/Cards.css';
 
 export default function Cards({characters,onClose}) {
    //se trabaja con constructor cuando se usa state. Los componentes de función capturan los valores renderizados.
@@ -9,11 +9,14 @@ export default function Cards({characters,onClose}) {
    return(
     
 
-         <div class="container text-center">
-         <div class="row row-cols-3">
-         {console.log(characters)}
+         <div >
+         <div class='cards'>
+         {console.log(characters.results)}
                   {characters.map((charactersItem,index,characters) => 
                   {return <Card key={characters[index].id} character={charactersItem} onClose={onClose}></Card>})}
+                  
+
+       
          </div>
          </div>
                

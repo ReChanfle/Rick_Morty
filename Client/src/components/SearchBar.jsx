@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../css/Nav.css';
 
 export default function SearchBar({onSearch}) {
 
@@ -12,11 +13,11 @@ export default function SearchBar({onSearch}) {
   function randomId () { return Math.round(Math.random()*20);} 
 
    return (
-      <div class="d-flex" role="search" >
-          <input onChange={handleChange} type="search" name="search" class="form-control m-2 bg-dark text-white" value={id} placeholder="Ingresa un personaje.." />
+       <>
+          <input class="inputs" role="search" onChange={handleChange} type="search" name="search" value={id} placeholder="Ingresa un personaje.." />
         
-         <button  class=" m-2 btn btn-dark" onClick={() => onSearch(id)}>Add</button> 
-         <button  class=" m-2 btn btn-dark" onClick={() => onSearch(randomId())}>Random</button>
-      </div>
+         <a  onClick={() => onSearch(id)}>Add</a> 
+         <a   onClick={() => onSearch(randomId())}>Random</a>
+         </>
    );
 }

@@ -5,12 +5,14 @@ const FILTER = 'FILTER';
 const ORDER = 'ORDER';
 const ORIGINAL = 'ORIGINAL';
 
+
 module.exports = {
     ADD_FAV,
     REMOVE_FAV,
     GET_DATA,
     ORDER,
     FILTER,
-    ORIGINAL
+    ORIGINAL,
+    
   
 }

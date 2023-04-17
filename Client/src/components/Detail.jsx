@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
+import '../css/Card.css';
 
 export default function Detail()
 {
@@ -54,15 +55,11 @@ export default function Detail()
         if(character.name)
             {
                  return (
-                    <div class="card text-center bg-dark text-white m-3">
-                        <div class="card-header">
-                            <ul class="nav nav-pills card-header-pills">
-                            
-                            </ul>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{character.name}</h5>
-                            <p class="card-text"> This Character is from {character.origin.name} his name is {character.name} and his species is {character.species} </p>
+                    <div >
+                      
+                        <div class="container">
+                            <h1>{character.name}</h1>
+                            <p > This Character is from {character.origin.name} his name is {character.name} and his species is {character.species} </p>
                             <Link  to="/home">
                                 <img src="https://cdn-icons-png.flaticon.com/512/391/391123.png" style={styleLogo}/> 
                             </Link>

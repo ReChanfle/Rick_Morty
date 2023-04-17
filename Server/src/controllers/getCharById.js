@@ -11,21 +11,21 @@ const URL = "https://rickandmortyapi.com/api/character/";
     try{
         let data  = responseJson;
 
-        if(data)
+       if(data)
         {
             var obj = {
                 id: data.id,
-	            name: data.name,
+	           name: data.name,
 	            status: data.status,
 	            species: data.species,
 	            type: data.type,
 	            gender: data.gender,
 	            origin: {
-		            name: data.origin.name,
+		           name: data.origin.name,
 		            
 	                    },
             }
-             res.status(200).json(obj);
+             res.status(200).json(responseJson);
         }
 
     }

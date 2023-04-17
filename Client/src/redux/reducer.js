@@ -1,10 +1,11 @@
-import { ADD_FAV, GET_DATA, REMOVE_FAV,FILTER,ORDER,ORIGINAL} from "./action-types/action-types";
+import { ADD_FAV, GET_DATA, REMOVE_FAV,FILTER,ORDER,ORIGINAL,TEST} from "./action-types/action-types";
 
 
 const initialState = {
     myFavorites: [],
-    characters: [],
-    allCharacters:[]
+    characters:[],
+    allCharacters:[],
+   
   };
 // Nuestro reducer que maneja nuestros dos casos de acción incremento y decremento.
 // Recibe el estado de nuestro store, junto con una action creada por nuestro action creator. 
@@ -32,7 +33,7 @@ const initialState = {
         case GET_DATA:
             return {
               ...state,
-              characters:action.payload,
+              characters: action.payload,
             };
             case FILTER:
                 const  resultFilter = state.allCharacters.filter((p) => 
@@ -52,6 +53,7 @@ const initialState = {
                  return 0;
 
                 }); 
+               
                 return {
                   ...state,
                   myFavorites: resultOrder,
@@ -61,6 +63,7 @@ const initialState = {
                     ...state,
                     myFavorites: state.allCharacters,
                   };
+                 
         default:
             return state;
     }

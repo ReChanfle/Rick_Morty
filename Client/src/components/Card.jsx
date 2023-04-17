@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState,useEffect } from "react";
 import { useDispatch,useSelector } from 'react-redux';
 import { addFav, removeFav } from "../redux/actions";
-
+import '../css/Card.css';
 export default function  Card({character,onClose}) {
 
       const [isFav,setFav] = useState(false);
@@ -32,7 +32,11 @@ export default function  Card({character,onClose}) {
            //console.log(character)
          fetch(`http://localhost:3001/fav`,{method:"PUT",headers: { 'Content-Type': 'application/json' },body:JSON.stringify(character)}).then((response)=> response.json())
                .then((data)=> 
-               dispatch(addFav(character))
+                  {
+                   
+                     dispatch(addFav(data))
+                  }
+               
      )
 
       
@@ -41,7 +45,11 @@ export default function  Card({character,onClose}) {
       function  remove () {
          fetch(`http://localhost:3001/fav`,{method:"DELETE",headers: { 'Content-Type': 'application/json' },body:JSON.stringify(character)}).then((response)=> response.json())
                .then((data)=> 
-               dispatch(removeFav(data))
+               {
+                 
+                  dispatch(removeFav(data))
+               }
+             
      )
       }
      
@@ -53,11 +61,12 @@ export default function  Card({character,onClose}) {
       
          if(isFav)
             {
+              
                setFav(false);
                remove();
             }
             else
-            {
+            { 
                setFav(true);
                add();
             }
@@ -72,7 +81,7 @@ export default function  Card({character,onClose}) {
     }
   
       return (
-        /* <div key={character.id}>
+       /*  <div key={character.id}>
             {
             isFav ? (
                <button onClick={handleFavorite}>❤️</button>
@@ -89,10 +98,43 @@ export default function  Card({character,onClose}) {
             <h2>{character.gender}</h2>
             <h2>{character.origin.name}</h2>
             <img src={character.image} alt='img_profile' /> 
-         </div> */
+         </div>  */
+
+       
+            <div class="container" >
+            <div class="wrapper" key={character.id}>
+               <div class="banner-image"> 
+              <img src={character.image} alt='img_profile' /> 
+               </div>
+               {
+            isFav ? (
+               <img src="https://cdn-icons-png.flaticon.com/512/210/210545.png" style={imgStyle} role="button" onClick={handleFavorite}/>
+                   ) : (
+               <img  src="https://cdn-icons-png.flaticon.com/512/10037/10037207.png"  style={imgStyle} role="button" onClick={handleFavorite}/>
+                  )
+            }        <h1>{character.name}</h1>
+                  <p>{character.status}</p>
+                     <p>{character.species}</p>
+                        <p>{character.gender}</p>
+                         <p>{character.origin.name}</p>
+            </div>
+            <div class="button-wrapper"> 
+           
+           <Link to={`/detail/${character.id}`}>
+                      <button class="btn outline">Details</button>
+                  </Link>
+                  {
+                      onClose && <button class="btn fill"  onClick={()=> onClose(character.id)}>DELETE</button>
+                  }
+            
+            </div>
+         </div>
+          
+            
 
 
-          <div class="card text-bg-dark  border-success m-2 " style={divStyle}  key={character.id}>
+
+        /*  <div  style={divStyle}  key={character.id}>
            {
             isFav ? (
                <img src="https://cdn-icons-png.flaticon.com/512/210/210545.png" style={imgStyle} role="button" onClick={handleFavorite}/>
@@ -100,16 +142,16 @@ export default function  Card({character,onClose}) {
                <img  src="https://cdn-icons-png.flaticon.com/512/10037/10037207.png"  style={imgStyle} role="button" onClick={handleFavorite}/>
                   )
             }     
-               <img src={character.image} class="card-img-top" alt='img_profile'/>
-               <div class="card-body">
-                  <h5 class="card-title">{character.name}</h5>
-                  <p class="card-text">{character.species}</p>
+               <img src={character.image}  alt='img_profile'/>
+               <div >
+                  <h5 >{character.name}</h5>
+                  <p >{character.species}</p>
                   <Link to={`/detail/${character.id}`}>
-                     <a  class="btn btn-outline-success">Details</a>
+                     <a  >Details</a>
                   </Link>
-                  <button class="btn btn-outline-danger ms-2" onClick={()=> onClose(character.id)}>Delete</button>
+                  <button  onClick={()=> onClose(character.id)}>Delete</button>
                </div>
-            </div> 
+            </div>  */
       );
    
 

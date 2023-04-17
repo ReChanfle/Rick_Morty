@@ -1,4 +1,4 @@
-import { ADD_FAV,REMOVE_FAV,GET_DATA,ORDER,FILTER,ORIGINAL } from "./action-types/action-types";
+import { ADD_FAV,REMOVE_FAV,GET_DATA,ORDER,FILTER,ORIGINAL,TEST } from "./action-types/action-types";
 
 
 // Nuestras actions (action creators) devolverán un paquete de actions que nuestro reducer recibirá. 
@@ -18,14 +18,16 @@ export const removeFav = (id) =>  {
 
 
 export const getCharacters = () => {
-    
+
+
   return async function (dispatch)
     {
-      const response = await fetch(`https://rickandmortyapi.com/api/character/`);
+      const response = await fetch(`https://rickandmortyapi.com/api/character`);
       
       const responsJson = await response.json();
 
       try{
+       
         dispatch({type: GET_DATA,payload:responsJson});
       }
       catch(err)

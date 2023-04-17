@@ -1,4 +1,4 @@
-import './App.css';
+import './css/App.css';
 import Cards from './components/Cards.jsx';
 import Nav from './components/Nav.jsx';
 import React, { useState,useEffect } from 'react';
@@ -9,12 +9,12 @@ import Detail from "./components/Detail.jsx";
 import Error from './components/Error';
 import Form from './components/Form';
 import Favorites from './components/Favorites';
-import { getCharacters } from './redux/actions';
+import { getCharacters} from './redux/actions';
 import { useDispatch,useSelector } from 'react-redux';
 
 function App() {
 
-              
+             
       let ready = false;
 
       const [characters,setCharacters] = useState([]);
@@ -33,22 +33,25 @@ function App() {
 
     //hook use bselector
       const favorites = useSelector((state)=>
-      state
+      state.myFavorites
    );
-  
-    
-            
+
+
       useEffect(() =>{
-               
+        
          dispatch(getCharacters());
       },[]);
+
+
+      
 
     
       const character = useSelector((state)=>
          state.characters
       );
 
-
+   
+      console.log("favs",favorites);
       
 function login(userData) 
 {
@@ -68,6 +71,8 @@ function logOut(user)
 
 function onSearch(id)
 {
+
+
            
    let exist = characters.find((e)=> e.id==id ? true : false)
    let finded = false;
@@ -91,19 +96,11 @@ function onSearch(id)
            if(exist)
           {
 
-            const divAlert = document.createElement('div')
-            let buttonAlert = document.createElement('button');
-            buttonAlert.className = 'btn-close';
-            buttonAlert.setAttribute('data-bs-dismiss','alert');
-            buttonAlert.setAttribute('type','button');
-            buttonAlert.setAttribute('aria-label','Close');
-            
-            divAlert.className = 'alert alert-success alert-dismissible fade show';
-            divAlert.setAttribute('role','alert');
+            const divAlert = document.createElement('a');
+            divAlert.setAttribute('id','alert');
             divAlert.textContent = "Already on display";
-            divAlert.appendChild(buttonAlert);
-            const search = document.getElementById('alertSearch');
-            if(search.childNodes.length===0)
+            const search = document.getElementById('myTopnav');
+            if(!document.getElementById('alert'))
             search.appendChild(divAlert);
 
                
@@ -114,21 +111,13 @@ function onSearch(id)
           }
           if(!finded && !exist)
           {
-            const divAlert = document.createElement('div')
-            let buttonAlert = document.createElement('button');
-            buttonAlert.className = 'btn-close';
-            buttonAlert.setAttribute('data-bs-dismiss','alert');
-            buttonAlert.setAttribute('type','button');
-            buttonAlert.setAttribute('aria-label','Close');
-            
-            divAlert.className = 'alert alert-danger alert-dismissible fade show';
-            divAlert.setAttribute('role','alert');
+            const divAlert = document.createElement('a')
+            divAlert.setAttribute('id','alert');
             divAlert.textContent = "Character not found";
-            divAlert.appendChild(buttonAlert);
-            const search = document.getElementById('alertSearch');
-            if(search.childNodes.length===0)
+         
+            const search = document.getElementById('myTopnav');
+           if(!document.getElementById('alert'))
             search.appendChild(divAlert);
-
                
                setTimeout(()=>{
                   if(search.contains(divAlert))
@@ -142,7 +131,7 @@ function onSearch(id)
 
 function onClose(id)
 {
-        console.log(id)
+      
        //  const newChars = characters.filter(e => e.id!==id);
        
          //setCharacters(
@@ -160,7 +149,43 @@ useEffect(() => {
    !access && navigate('/');
 }, [access]);
 
+function handlePagination (event){
+     
+         let nextPage = character.info.next;
+         let prevPage = character.info.prev;
 
+         //console.log(event.target.name)
+
+         console.log(resultTest);
+
+         if(event.target.name==='prev')
+         {
+            let resultToDispatch;
+               if(character.info.prev)
+                resultToDispatch = character.info.prev[character.info.prev.length-1];
+                else
+                resultToDispatch = 0;
+
+         
+          
+         }
+           
+       
+         if(event.target.name==='next')
+         {
+            let resultToDispatch;
+               if(character.info.next)
+                resultToDispatch =character.info.next[character.info.next.length-1];
+                else
+                resultToDispatch = 0;
+                
+            
+        
+         }
+         /* <button onClick={handlePagination} name='prev'>PREV</button>
+            <button onClick={handlePagination} name='next'>NEXT</button> */
+
+}
 
 
    return (
@@ -170,12 +195,11 @@ useEffect(() => {
              <Route path="/" element={<Form login={login} />}/>
             <Route path="/home" element={ <Cards  characters={characters} onClose={onClose}/>}/>
             <Route path="/about" element={<About />}/>
-            <Route path="/favorites" element={<Favorites favorites={favorites.myFavorites} onClose={onClose}/>}/>
+            <Route path="/favorites" element={<Favorites favorites={favorites} onClose={onClose}/>}/>
             <Route path="/detail/:id" element={ <Detail characters={characters} />}/>
             <Route path="*" element={<Error />} />
-      
       </Routes>
-            
+   
           
       </div>
    );

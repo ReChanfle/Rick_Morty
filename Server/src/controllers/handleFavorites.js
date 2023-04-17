@@ -4,6 +4,9 @@ var favorites = [];
 
 function postFav(req,res)
 {
+
+       
+
         let alreadyOn = false;
         favorites.find((e)=>{
             if(e.id===req.body.id)
@@ -15,20 +18,24 @@ function postFav(req,res)
             else
             {
                 favorites.push(req.body);
-                res.status(200).json(favorites);
+                res.status(200).json(favorites[favorites.length-1]);
             }
+
+         
 
 }
 
 function deleteFav(req,res)
 {
         
-        
+   
 
        let char = favorites.find((e)=> e.id===req.body.id);
             
         favorites = favorites.filter((e)=> e.id!==char.id);
            
+      
+
         if(char)
             res.status(200).json(char.id);
             else
